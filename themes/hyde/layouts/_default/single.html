@@ -1,0 +1,16 @@
+{{ define "main" -}}
+<div class="post">
+  <h1>{{ .Title }}</h1>
+  {{ if .Date }}
+  <time class="post-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">
+    {{ .Date.Day }} {{ index $.Site.Data.months_pl (printf "%d" .Date.Month) }} {{ .Date.Year }}
+  </time>
+  {{- end }}
+  {{ .Content }}
+</div>
+
+{{ if .Site.DisqusShortname -}}
+<h2>Comments</h2>
+{{ template "_internal/disqus.html" . }}
+{{- end }}
+{{- end }}

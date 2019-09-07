@@ -1,0 +1,20 @@
+{{ define "main" -}}
+<div class="posts">
+{{ range .Site.RegularPages -}}
+<article class="post">
+  <h1 class="post-title">
+    <a href="{{ .Permalink }}">{{ .Title }}</a>
+  </h1>
+  <time class="post-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">
+    {{ .Date.Day }} {{ index $.Site.Data.months_pl (printf "%d" .Date.Month) }} {{ .Date.Year }}
+  </time>
+  {{ .Summary }}
+  {{ if .Truncated }}
+  <div class="read-more-link">
+    <a href="{{ .RelPermalink }}">Więcej…</a>
+  </div>
+  {{ end }}
+</article>
+{{- end }}
+</div>
+{{- end }}
